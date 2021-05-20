@@ -1,5 +1,7 @@
 const socketIO = require('socket.io')
 const rooms = require('./services/rooms')
+const onlineUsers = require('./services/users')
+const templateMessages = require('./services/templateMessages')
 
 module.exports = (httpServer, session, passport) => {
     let io = socketIO(httpServer, {
@@ -25,8 +27,17 @@ module.exports = (httpServer, session, passport) => {
 
     io.on('connection', socket => {
         socket.join(rooms.Family)
-        console.log(socket.rooms)
-        socket.emit('connection', {username: socket.request.user.username})
+        onlineUsers.connectUser(socket.request.user._id, socket.id, rooms.Family)
+        const data = templateMessages.userAndUsersRoomInfo(socket.request.user.username, onlineUsers.roomUsers(rooms.Family))
+        io.to(rooms.Family).emit('updateUsers', data)
         socket.emit('message', 'connected')
+        console.log(onlineUsers.allOnlineUsers())
+
+        socket.on('disconnect', reason => {
+            onlineUsers.disconnectUser(socket.id)
+            const data = templateMessages.userAndUsersRoomInfo(socket.request.user.username, onlineUsers.roomUsers(rooms.Family))
+            io.to(rooms.Family).emit('updateUsers', data)
+            console.log('disconnect log', onlineUsers.allOnlineUsers())
+        })
     })
 }

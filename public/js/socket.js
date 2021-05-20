@@ -3,7 +3,6 @@ const socket = io('http://localhost:3000', {
 })
 socket.on("connection", (data) => {
     console.log('connecting...')
-    document.querySelector('.username').textContent = `Hello ${data.username}`
 })
 socket.on('message', data => {
     console.log(data)
@@ -11,4 +10,8 @@ socket.on('message', data => {
 
 socket.on('private', data => {
     console.log(data)
+})
+socket.on('updateUsers', data => {
+    console.log(data)
+    document.querySelector('.username').textContent = `Hello ${data.username}`
 })
