@@ -8,7 +8,6 @@ module.exports = function (passport) {
         new LocalStrategy(async (username, password, done) => {
             try {
                 const user = await User.findOne({username})
-                console.log(user)
                 if (user === null) return done(null, false, {message: 'user not exist'})
                 const isValidPass = bcrypt.compareSync(password, user.password)
                 if (isValidPass) return done(null, user)
