@@ -1,7 +1,7 @@
 let onlineUsersBySocketId = []
 
-module.exports.connectUser = (userId, socketId, room) => {
-    onlineUsersBySocketId.push({userId, socketId, room})
+module.exports.connectUser = (userId, username, socketId, room) => {
+    onlineUsersBySocketId.push({userId, username, socketId, room})
 }
 module.exports.disconnectUser = socketId => {
     onlineUsersBySocketId = onlineUsersBySocketId.filter(user => user.socketId !== socketId)
