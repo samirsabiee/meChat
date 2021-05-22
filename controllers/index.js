@@ -1,5 +1,5 @@
 const passport = require("passport");
-module.exports.showLogin = (req, res) => {
+module.exports.showLogin = async (req, res) => {
     res.render('login')
 }
 module.exports.login = (req, res, next) => {

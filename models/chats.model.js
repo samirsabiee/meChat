@@ -1,9 +1,12 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const chatsSchema = new Schema({
-    text: {type: String, required: true},
-    sender: {type: String, required: true},
-    receivers: {type: [String], required: true}
-}, {timestamps: true})
+const chatSchema = require('../database/schema/chats.schema')
 
-module.exports = mongoose.model('Chats', chatsSchema, 'chats')
+module.exports.create = obj => {
+ return chatSchema.create(sortArrayValue(obj))
+}
+
+function sortArrayValue(obj) {
+    for (let objKey in obj) {
+        if (Array.isArray(obj[objKey])) obj[objKey].sort()
+    }
+    return obj
+}

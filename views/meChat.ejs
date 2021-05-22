@@ -894,13 +894,13 @@
     <div class="panel messages-panel">
         <div class="contacts-list">
             <div class="inbox-categories">
-                <div data-toggle="tab" data-target="#inbox" class="active"> Family</div>
-                <div data-toggle="tab" data-target="#sent"> Social</div>
-                <div data-toggle="tab" data-target="#marked"> Friends</div>
-                <div data-toggle="tab" data-target="#drafts"> All</div>
+                <div data-toggle="tab" data-target="#inbox" class="tab-category"> Family</div>
+                <div data-toggle="tab" data-target="#sent" class="tab-category"> Social</div>
+                <div data-toggle="tab" data-target="#marked" class="tab-category"> Friends</div>
+                <div data-toggle="tab" data-target="#drafts" class="tab-category active"> All</div>
             </div>
             <div class="tab-content">
-                <div id="inbox" class="contacts-outter-wrapper tab-pane active">
+                <div id="inbox" class="contacts-outter-wrapper tab-pane">
                     <form class="panel-search-form info form-group has-feedback no-margin-bottom">
                         <input type="text" class="form-control" name="search" placeholder="Search">
                         <span class="fa fa-search form-control-feedback"></span>
@@ -976,7 +976,7 @@
                         </ul>
                     </div>
                 </div>
-                <div id="drafts" class="contacts-outter-wrapper tab-pane">
+                <div id="drafts" class="contacts-outter-wrapper tab-pane active">
                     <form class="panel-search-form dark form-group has-feedback no-margin-bottom">
                         <input type="text" class="form-control" name="search" placeholder="Search">
                         <span class="fa fa-search form-control-feedback"></span>
@@ -1004,328 +1004,13 @@
         </div>
 
         <div class="tab-content">
-            <div class="tab-pane message-body active" id="inbox-message-1">
+            <div class="tab-pane message-body active mTabBody" id="user-1">
                 <div class="message-top">
-                    <a class="btn btn btn-success new-message username"> New Message </a>
-
-                    <div class="new-message-wrapper">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Send message to...">
-                            <a class="btn btn-danger close-new-message" href="#"><i class="fa fa-times"></i></a>
-                        </div>
-
-                        <div class="chat-footer new-message-textarea">
-                            <textarea class="send-message-text"></textarea>
-                            <label class="upload-file">
-                                <input type="file" required="">
-                                <i class="fa fa-paperclip"></i>
-                            </label>
-                            <button type="button" class="send-message-button btn-info"><i class="fa fa-send"></i>
-                            </button>
-                        </div>
-                    </div>
+                    <a class="btn btn btn-success new-message username"> <i class="fa fa-envelope"></i> New Message </a>
                 </div>
 
                 <div class="message-chat">
-                    <div class="chat-body">
-                        <div class="message info">
-                            <img alt="" class="img-circle medium-image"
-                                 src="https://bootdey.com/img/Content/avatar/avatar1.png">
-
-                            <div class="message-body">
-                                <div class="message-info">
-                                    <h4> Elon Musk </h4>
-                                    <h5><i class="fa fa-clock-o"></i> 2:25 PM </h5>
-                                </div>
-                                <hr>
-                                <div class="message-text">
-                                    I've seen your new template, Dauphin, it's amazing !
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-
-                        <div class="message my-message">
-                            <img alt="" class="img-circle medium-image"
-                                 src="https://bootdey.com/img/Content/avatar/avatar1.png">
-
-                            <div class="message-body">
-                                <div class="message-body-inner">
-                                    <div class="message-info">
-                                        <h4> Dennis Novac </h4>
-                                        <h5><i class="fa fa-clock-o"></i> 2:28 PM </h5>
-                                    </div>
-                                    <hr>
-                                    <div class="message-text">
-                                        Thanks, I think I will use this for my next dashboard system.
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-
-                        <div class="message info">
-                            <img alt="" class="img-circle medium-image"
-                                 src="https://bootdey.com/img/Content/avatar/avatar1.png">
-
-                            <div class="message-body">
-                                <div class="message-info">
-                                    <h4> Elon Musk </h4>
-                                    <h5><i class="fa fa-clock-o"></i> 2:32 PM </h5>
-                                </div>
-                                <hr>
-                                <div class="message-text">
-                                    Hah, too late, I already bought it and my team is impleting the new design right
-                                    now.
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-                    </div>
-
-                    <div class="chat-footer">
-                        <textarea class="send-message-text"></textarea>
-                        <label class="upload-file">
-                            <input type="file" required="">
-                            <i class="fa fa-paperclip"></i>
-                        </label>
-                        <button type="button" class="send-message-button btn-info"><i class="fa fa-send"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-pane message-body" id="sent-message-1">
-                <div class="message-top">
-                    <a class="btn btn btn-success new-message"> <i class="fa fa-envelope"></i> New Message </a>
-
-                    <div class="new-message-wrapper">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Send message to...">
-                            <a class="btn btn-danger close-new-message" href="#"><i class="fa fa-times"></i></a>
-                        </div>
-
-                        <div class="chat-footer new-message-textarea">
-                            <textarea class="send-message-text"></textarea>
-                            <label class="upload-file">
-                                <input type="file" required="">
-                                <i class="fa fa-paperclip"></i>
-                            </label>
-                            <button type="button" class="send-message-button btn-info"><i class="fa fa-send"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="message-chat">
-                    <div class="chat-body">
-
-                        <div class="message my-message">
-                            <img alt="" class="img-circle medium-image"
-                                 src="https://bootdey.com/img/Content/avatar/avatar1.png">
-
-                            <div class="message-body">
-                                <div class="message-body-inner">
-                                    <div class="message-info">
-                                        <h4> Dennis Novac </h4>
-                                        <h5><i class="fa fa-clock-o"></i> 2:05 PM </h5>
-                                    </div>
-                                    <hr>
-                                    <div class="message-text">
-                                        Hi, I've just finished the stickers you wanted. I'll send them to you in an
-                                        archive in 10 minutes.
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-
-                        <div class="message success">
-                            <img alt="" class="img-circle medium-image"
-                                 src="https://bootdey.com/img/Content/avatar/avatar1.png">
-
-                            <div class="message-body">
-                                <div class="message-info">
-                                    <h4> David Beckham </h4>
-                                    <h5><i class="fa fa-clock-o"></i> 2:11 PM </h5>
-                                </div>
-                                <hr>
-                                <div class="message-text">
-                                    Hello, Dennis. Thanks. Also how's it going with our latest football website. Do you
-                                    need any additional help or information?
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-
-                        <div class="message success">
-                            <img alt="" class="img-circle medium-image"
-                                 src="https://bootdey.com/img/Content/avatar/avatar1.png">
-
-                            <div class="message-body">
-                                <div class="message-info">
-                                    <h4> David Beckham </h4>
-                                    <h5><i class="fa fa-clock-o"></i> 2:24 PM </h5>
-                                </div>
-                                <hr>
-                                <div class="message-text">
-                                    I would like to take a look at it this evening, is it possible ?
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-
-                        <div class="message my-message">
-                            <img alt="" class="img-circle medium-image"
-                                 src="https://bootdey.com/img/Content/avatar/avatar1.png">
-
-                            <div class="message-body">
-                                <div class="message-body-inner">
-                                    <div class="message-info">
-                                        <h4> Dennis Novac </h4>
-                                        <h5><i class="fa fa-clock-o"></i> 2:25 PM </h5>
-                                    </div>
-                                    <hr>
-                                    <div class="message-text">
-                                        It's going well, no need for any other help, thanks. Sure, send me a message
-                                        when you'll be ready.
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-
-                    </div>
-
-                    <div class="chat-footer">
-                        <textarea class="send-message-text"></textarea>
-                        <label class="upload-file">
-                            <input type="file" required="">
-                            <i class="fa fa-paperclip"></i>
-                        </label>
-                        <button type="button" class="send-message-button btn-info"><i class="fa fa-send"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-pane message-body" id="marked-message-1">
-                <div class="message-top">
-                    <a class="btn btn btn-success new-message"> <i class="fa fa-envelope"></i> New Message </a>
-
-                    <div class="new-message-wrapper">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Send message to...">
-                            <a class="btn btn-danger close-new-message" href="#"><i class="fa fa-times"></i></a>
-                        </div>
-
-                        <div class="chat-footer new-message-textarea">
-                            <textarea class="send-message-text"></textarea>
-                            <label class="upload-file">
-                                <input type="file" required="">
-                                <i class="fa fa-paperclip"></i>
-                            </label>
-                            <button type="button" class="send-message-button btn-info"><i class="fa fa-send"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="message-chat">
-                    <div class="chat-body">
-                        <div class="message warning">
-                            <img alt="" class="img-circle medium-image"
-                                 src="https://bootdey.com/img/Content/avatar/avatar1.png">
-
-                            <div class="message-body">
-                                <div class="message-info">
-                                    <h4> Jessica Fresco </h4>
-                                    <h5><i class="fa fa-clock-o"></i> 1:44 PM </h5>
-                                </div>
-                                <hr>
-                                <div class="message-text">
-                                    Hello, Dennis. I wanted to let you know we reviewed your proposal and decided you'll
-                                    start working together with our UI/UX team on Tuesday, January 10th, 2017.
-                                    Congratulations and thank you!
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-
-                        <div class="message my-message">
-                            <img alt="" class="img-circle medium-image"
-                                 src="https://bootdey.com/img/Content/avatar/avatar1.png">
-
-                            <div class="message-body">
-                                <div class="message-body-inner">
-                                    <div class="message-info">
-                                        <h4> Dennis Novac </h4>
-                                        <h5><i class="fa fa-clock-o"></i> 1:51 PM </h5>
-                                    </div>
-                                    <hr>
-                                    <div class="message-text">
-                                        Hello, great news. I'm sure we're going to make something amazing together!
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-
-                    </div>
-
-                    <div class="chat-footer">
-                        <textarea class="send-message-text"></textarea>
-                        <label class="upload-file">
-                            <input type="file" required="">
-                            <i class="fa fa-paperclip"></i>
-                        </label>
-                        <button type="button" class="send-message-button btn-info"><i class="fa fa-send"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-pane message-body" id="user-1">
-                <div class="message-top">
-                    <a class="btn btn btn-success new-message"> <i class="fa fa-envelope"></i> New Message </a>
-
-                    <div class="new-message-wrapper">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Send message to...">
-                            <a class="btn btn-danger close-new-message" href="#"><i class="fa fa-times"></i></a>
-                        </div>
-
-                        <div class="chat-footer new-message-textarea">
-                            <textarea class="send-message-text"></textarea>
-                            <label class="upload-file">
-                                <input type="file" required="">
-                                <i class="fa fa-paperclip"></i>
-                            </label>
-                            <button type="button" class="send-message-button btn-info"><i class="fa fa-send"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="message-chat">
-                    <div class="chat-body">
-
-                        <div class="message my-message">
-                            <img alt="" class="img-circle medium-image"
-                                 src="https://bootdey.com/img/Content/avatar/avatar1.png">
-
-                            <div class="message-body">
-                                <div class="message-body-inner">
-                                    <div class="message-info">
-                                        <h4> Dennis Novac </h4>
-                                        <h5><i class="fa fa-clock-o"></i> 4:22 PM </h5>
-                                    </div>
-                                    <hr>
-                                    <div class="message-text">
-                                        Hello, Mila, can you send me the latest pack of icons, I need all the source
-                                        files. Thanks.
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                        </div>
+                    <div class="chat-body mChatBody">
 
                     </div>
 

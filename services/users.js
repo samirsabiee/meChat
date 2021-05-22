@@ -1,13 +1,13 @@
-let onlineUsersBySocketId = []
+let onlineUsers = []
 
 module.exports.connectUser = (userId, username, socketId, room) => {
-    onlineUsersBySocketId.push({userId, username, socketId, room})
+    onlineUsers.push({userId, username, socketId, room})
 }
 module.exports.disconnectUser = socketId => {
-    onlineUsersBySocketId = onlineUsersBySocketId.filter(user => user.socketId !== socketId)
+    onlineUsers = onlineUsers.filter(user => user.socketId !== socketId)
 }
 module.exports.changeRoom = (userId, room) => {
-    onlineUsersBySocketId = onlineUsersBySocketId.map((user, index, arr) => {
+    onlineUsers = onlineUsers.map((user, index, arr) => {
         if (user.userId === userId) {
             user.room = room
             return arr
@@ -15,7 +15,11 @@ module.exports.changeRoom = (userId, room) => {
     })
 }
 module.exports.roomUsers = room => {
-    return onlineUsersBySocketId.filter(user => user.room === room)
+    return onlineUsers.filter(user => user.room === room)
 }
 
-module.exports.allOnlineUsers = () => onlineUsersBySocketId
+module.exports.allOnlineUsers = () => onlineUsers
+
+module.exports.onlineUserById = userId => {
+    return onlineUsers.filter(user => user.userId.toString() === userId)
+}

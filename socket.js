@@ -1,7 +1,7 @@
 const socketIO = require('socket.io')
 const rooms = require('./services/rooms')
 const onlineUsers = require('./services/users')
-const templateMessages = require('./services/templateMessages')
+const chatModel = require('./models/chats.model')
 const chatRoomModel = require('./models/chatRoom.model')
 require('./models/chats.model')
 
@@ -35,9 +35,24 @@ module.exports = (httpServer, session, passport) => {
         socket.emit('message', 'connected')
         socket.on('lastChats', async users => {
             users.push(socket.request.user._id.toString())
-            users.sort()
-            const chats = await chatRoomModel.find({users}).populate('chats')
+            const chats = await chatRoomModel.findOnePopulated({users})
             socket.emit('lastChats', chats)
+        })
+        socket.on('privateMessage', async data => {
+            let userArray = onlineUsers.onlineUserById(data.userId)
+            let chat = await chatModel.create({
+                text: data.text,
+                sender: socket.request.user._id,
+                receivers: [userArray[0].userId]
+            })
+            let chatRoom = await chatRoomModel.appendOrCreate({
+                chatId: chat._id,
+                users: [userArray[0].userId, socket.request.user._id]
+            })
+            console.log(chatRoom)
+            userArray.forEach(user => {
+                io.to(user.socketId).emit('privateMessage', data.text)
+            })
         })
         socket.on('disconnect', reason => {
             onlineUsers.disconnectUser(socket.id)

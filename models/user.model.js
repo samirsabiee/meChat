@@ -1,14 +1,11 @@
-const mongoose = require('mongoose')
-const byt = require('bcryptjs')
-const Schema = mongoose.Schema
-const userSchema = new Schema({
-    username: {type: String, required: true, unique: true},
-    password: {type: String, required: true}
-})
+const userSchema = require('../database/schema/user.schema')
+module.exports.create = user => {
+    return userSchema.create(user)
+}
+module.exports.findById = id => {
+    return userSchema.findById(id)
+}
 
-userSchema.pre('save', function (next) {
-    this.password = byt.hashSync(this.password, 10);
-    next()
-})
-
-module.exports = mongoose.model('User', userSchema, 'users')
+module.exports.findOne = info => {
+    return userSchema.findOne(info)
+}
