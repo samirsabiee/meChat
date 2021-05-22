@@ -40,7 +40,7 @@ module.exports = (httpServer, session, passport) => {
         })
         socket.on('privateMessage', async data => {
             let userArray = onlineUsers.onlineUserById(data.userId)
-            let chat = await chatModel.create({
+            let chat = await chatModel.createPopulatedBySender({
                 text: data.text,
                 sender: socket.request.user._id,
                 receivers: [userArray[0].userId]
@@ -49,10 +49,13 @@ module.exports = (httpServer, session, passport) => {
                 chatId: chat._id,
                 users: [userArray[0].userId, socket.request.user._id]
             })
-            console.log(chatRoom)
-            userArray.forEach(user => {
-                io.to(user.socketId).emit('privateMessage', data.text)
-            })
+            if (chatRoom !== undefined && chatRoom.hasOwnProperty('nModified') || chatRoom.hasOwnProperty('chats')) {
+                userArray.forEach(user => {
+                    io.to(user.socketId).emit('privateMessage', chat)
+                })
+            } else {
+                socket.emit('message', {message: 'fail to send chat message'})
+            }
         })
         socket.on('disconnect', reason => {
             onlineUsers.disconnectUser(socket.id)

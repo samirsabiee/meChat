@@ -1,7 +1,12 @@
 const chatSchema = require('../database/schema/chats.schema')
 
-module.exports.create = obj => {
- return chatSchema.create(sortArrayValue(obj))
+module.exports.createPopulatedBySender = async obj => {
+    const chat = await chatSchema.create(sortArrayValue(obj))
+    return this.findByIdPopulatedBySender(chat._id)
+}
+
+module.exports.findByIdPopulatedBySender = id => {
+    return chatSchema.findById(id).populate('sender')
 }
 
 function sortArrayValue(obj) {

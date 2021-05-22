@@ -33,14 +33,13 @@ $(document).ready(function () {
         chatBody.innerHTML = ""
         data.chats.forEach(chat => {
             if (chat.sender._id === userInfo.userId)
-                chatBody.append(createMyMessageTemplate(chat))
+                chatBody.append(createMyMessage(chat))
             else chatBody.append(createAudienceMessage(getTabCategorySelectedColor(), chat))
         })
     })
 
-    socket.on('privateMessage', data => {
-        console.log(data)
-        //appendChatMessage()
+    socket.on('privateMessage', chat => {
+        appendAudienceMessage(chat)
     })
 
     document.querySelectorAll('.tab-category').forEach(tab => {
@@ -56,6 +55,7 @@ $(document).ready(function () {
         if (userId !== "1") {
             let text = getTextInputMessage()
             socket.emit('privateMessage', {userId, text})
+            appendMyMessage(text)
         } else alert('select user')
 
     })
@@ -126,7 +126,7 @@ $(document).ready(function () {
         })
     }
 
-    function createMyMessageTemplate(chat) {
+    function createMyMessage(chat) {
         //-----------------------------------------
         let myMessageDiv = document.createElement('div')
         myMessageDiv.classList.add('message', 'my-message')
@@ -222,10 +222,21 @@ $(document).ready(function () {
         return $('.mTabBody').attr('id').split('-')[1]
     }
 
-    function appendChatMessage(chat) {
+    function appendAudienceMessage(chat) {
         let chatBody = $('.mChatBody')
-        if (chat.sender._id === userInfo.userId)
-            chatBody.append(createMyMessageTemplate(chat))
-        else chatBody.append(createAudienceMessage(getTabCategorySelectedColor(), chat))
+        chatBody.append(createAudienceMessage(getTabCategorySelectedColor(), chat))
+    }
+
+    function appendMyMessage(text) {
+        let chatBody = $('.mChatBody')
+        let chat = {
+            text,
+            sender: {
+                _id: userInfo.userId,
+                username: userInfo.username
+            },
+            createdAt: Date.now()
+        }
+        chatBody.append(createMyMessage(chat))
     }
 })
