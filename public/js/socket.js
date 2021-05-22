@@ -36,6 +36,7 @@ $(document).ready(function () {
                 chatBody.append(createMyMessage(chat))
             else chatBody.append(createAudienceMessage(getTabCategorySelectedColor(), chat))
         })
+        chatBodyScrollDown()
     })
 
     socket.on('privateMessage', chat => {
@@ -53,9 +54,11 @@ $(document).ready(function () {
     document.querySelector('.send-message-button').addEventListener('click', e => {
         let userId = getPVUserId()
         if (userId !== "1") {
-            let text = getTextInputMessage()
+            let input = $('.send-message-text')
+            let text = input.val()
             socket.emit('privateMessage', {userId, text})
             appendMyMessage(text)
+            input.val('')
         } else alert('select user')
 
     })
@@ -214,21 +217,18 @@ $(document).ready(function () {
         }
     }
 
-    function getTextInputMessage() {
-        return $('.send-message-text').val()
-    }
-
     function getPVUserId() {
         return $('.mTabBody').attr('id').split('-')[1]
     }
 
     function appendAudienceMessage(chat) {
-        let chatBody = $('.mChatBody')
+        let chatBody = document.querySelector('.mChatBody')
         chatBody.append(createAudienceMessage(getTabCategorySelectedColor(), chat))
+        chatBodyScrollDown()
     }
 
     function appendMyMessage(text) {
-        let chatBody = $('.mChatBody')
+        let chatBody = document.querySelector('.mChatBody')
         let chat = {
             text,
             sender: {
@@ -238,5 +238,11 @@ $(document).ready(function () {
             createdAt: Date.now()
         }
         chatBody.append(createMyMessage(chat))
+        chatBodyScrollDown()
+    }
+
+    function chatBodyScrollDown() {
+        let chatBody = document.querySelector('.mChatBody')
+        chatBody.scrollTop = chatBody.scrollHeight + 60
     }
 })
