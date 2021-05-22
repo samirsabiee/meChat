@@ -9,3 +9,7 @@ module.exports.findById = id => {
 module.exports.findOne = info => {
     return userSchema.findOne(info)
 }
+
+module.exports.countUsers = username => {
+    return userSchema.countDocuments({username})
+}
